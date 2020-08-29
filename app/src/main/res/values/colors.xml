@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="orgMsModuleDialogcolorLoadingTextWeiBo">#f0f0f0</color>
+    <color name="orgMsModuleDialogcolorLoadingText">#393939</color>
+    <color name="orgMsModuleDialogcolorLoadingBg">#f5ffffff</color>
+    <color name="orgMsModuleDialogcolorLoadingBgWei">#a5000000</color>
+
+    <color name="TextInputLayoutHintColor">#8E95A5</color>
+</resources>

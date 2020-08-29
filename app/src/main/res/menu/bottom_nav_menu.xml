@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@drawable/tab_bar_message"
+        android:title="消息" />
+
+    <item
+        android:id="@+id/navigation_nearby"
+        android:icon="@drawable/image_nearby"
+        android:title="附近" />
+
+
+    <item
+        android:id="@+id/navigation_addressbook"
+        android:icon="@drawable/image_address_book"
+        android:title="通讯录" />
+
+    <item
+        android:id="@+id/navigation_my"
+        android:icon="@drawable/tab_bar_my"
+        android:title="我的" />
+
+</menu>

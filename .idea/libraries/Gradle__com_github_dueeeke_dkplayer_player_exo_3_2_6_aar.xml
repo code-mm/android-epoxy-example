@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.dueeeke.dkplayer:player-exo:3.2.6@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d6458721dad375250d13cd60255e7354/jetified-player-exo-3.2.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d6458721dad375250d13cd60255e7354/jetified-player-exo-3.2.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d6458721dad375250d13cd60255e7354/jetified-player-exo-3.2.6/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dueeeke.dkplayer/player-exo/3.2.6/ddb52bfec702cf979eb5b66a8ec71bfe7ae8dc31/player-exo-3.2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dueeeke.dkplayer/player-exo/3.2.6/25593b9b4b88b887aaef4c547b42ac41bff543b/player-exo-3.2.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

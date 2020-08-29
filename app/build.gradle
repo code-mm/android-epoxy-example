@@ -1,0 +1,237 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+def _app_name = "买卖提"
+def _version_name = "1.0.0.0"
+def _version_code = 1
+def _output_apk_name = "maimaiti-release.apk"
+
+def buildApkTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))
+    //return new Date().format("yyyy-MM-dd-HH-ss-mm-sss", TimeZone.getTimeZone("GMT+8"))
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.ms.app"
+        minSdkVersion 27
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        flavorDimensions "versionCode"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('./key.jks')
+            storePassword 'dev.2020'
+            keyPassword 'dev.2020'
+            keyAlias = 'dev'
+        }
+
+        debug {
+            storeFile file('./key.jks')
+            storePassword 'dev.2020'
+            keyPassword 'dev.2020'
+            keyAlias = 'dev'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    packagingOptions {
+
+    }
+
+    productFlavors {
+        dev {
+            signingConfig signingConfigs.release
+            applicationId "com.bdlbsc.app.dev"
+            manifestPlaceholders = [
+                    app_name          : _app_name,
+                    // 渠道名称
+                    channel_name      : "bdlbsc",
+                    // 服务器地址
+                    server_url        : "http://test.guanai99.com/graphql/",
+                    // 腾讯BUGLY
+                    BUGLY_APPID       : "b42d1427ca",
+                    // 腾讯BUGLY 版本
+                    BUGLY_APP_VERSION : _version_name,
+                    // 腾讯BUGLY 渠道
+                    BUGLY_APP_CHANNEL : "DEV",
+                    // 腾讯BUGLY 调试模式
+                    BUGLY_ENABLE_DEBUG: true
+            ]
+
+            resValue("string", "base_url", "http://test.guanai99.com/graphql/")
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.isDebuggable()) {
+                outputFileName = "${_app_name}-${variant.productFlavors.get(0).name}-v${defaultConfig.versionName}-debug-${buildApkTime()}.apk"
+            } else {
+                //outputFileName = "${_app_name}-${variant.productFlavors.get(0).name}-v${defaultConfig.versionName}-release-${buildApkTime()}.apk"
+                outputFileName = _output_apk_name
+            }
+        }
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //dex
+    implementation group: 'androidx.multidex', name: 'multidex', version: '2.0.1'
+
+    // 工具类
+    // implementation 'org.ms:androidx-sdk-module-supper:latest'
+    implementation 'com.google.guava:guava:29.0-android'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // gapi
+    implementation "com.contentbig:bimiddle-gapi-client-sdk-android:always.latest"
+
+    // zxing https://github.com/jenly1314/ZXingLite
+    implementation 'com.king.zxing:zxing-lite:1.1.9-androidx'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+
+    // okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.10.0'
+    // gson
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+    // rxjava rxandroid
+    implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.1.2'
+    implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.0.2'
+    // retrofit
+    implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.4.0'
+    // retrofit gson 适配器
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // retrofit rxjava 适配器
+    implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: '2.5.0'
+    // okhttp 日志
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    // mmkv
+    implementation 'com.tencent:mmkv-static:1.1.1'
+
+    // 拼音
+    implementation 'com.github.promeg:tinypinyin:2.0.3'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+}
+
+dependencies {
+    def nav_version = "2.3.0-alpha01"
+
+    // Java language implementation
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Dynamic Feature Module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+    // Testing Navigation
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+}
+
+
+//视频播放
+dependencies {
+    // 必选，内部默认使用系统mediaplayer进行解码
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.6'
+
+    // 可选，包含StandardVideoController的实现
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.6'
+
+    // 可选，使用exoplayer进行解码
+    implementation 'com.github.dueeeke.dkplayer:player-exo:3.2.6'
+
+    // 可选，使用ijkplayer进行解码
+    implementation 'com.github.dueeeke.dkplayer:player-ijk:3.2.6'
+
+    // 可选，如需要缓存或者抖音预加载功能请引入此库
+    implementation 'com.github.dueeeke.dkplayer:videocache:3.2.6'
+}
+
+
+
+
+//glide
+dependencies {
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+}
+
+//https://github.com/airbnb/MvRx
+dependencies {
+    implementation 'com.airbnb.android:mvrx:1.5.1'
+}
+
+//https://github.com/airbnb/epoxy
+dependencies {
+    implementation 'com.airbnb.android:epoxy:3.7.0'
+
+    implementation("com.airbnb.android:epoxy-databinding:3.7.0") {
+        exclude group: 'com.android.support'
+    }
+
+
+    // Add the annotation processor if you are using Epoxy's annotations (recommended)
+    kapt 'com.airbnb.android:epoxy-processor:3.7.0'
+}
+
+
+
+dependencies {
+    // Validation
+    implementation "com.github.ilhasoft:data-binding-validator:2.0.0"
+}

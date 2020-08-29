@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/messageFragment">
+
+
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.ms.app.ui.fragment.message.MessageFragment"
+        android:label="MessageFragment" />
+
+    <fragment
+        android:id="@+id/nearbyFragment"
+        android:name="com.ms.app.ui.fragment.nearby.NearbyFragment"
+        android:label="NearbyFragment" />
+
+    <fragment
+        android:id="@+id/addressBookFragment"
+        android:name="com.ms.app.ui.fragment.addressbook.AddressBookFragment"
+        android:label="AddressBookFragment" />
+
+    <fragment
+        android:id="@+id/myFragment"
+        android:name="com.ms.app.ui.fragment.my.MyFragment"
+        android:label="MyFragment" />
+
+
+</navigation>
